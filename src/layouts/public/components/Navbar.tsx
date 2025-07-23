@@ -23,38 +23,48 @@ export default function Navbar() {
             Flowbite
           </span>
         </a>
-        <div className="relative flex items-center space-x-3 md:order-2 md:space-x-0 rtl:space-x-reverse">
-          <DropdownMenu
-            trigger={
-              <button
-                type="button"
-                className="flex rounded-full bg-gray-800 text-sm focus:ring-4 focus:ring-gray-300 md:me-0 dark:focus:ring-gray-600"
-                id="user-menu-button"
-                aria-expanded="false"
-                data-dropdown-toggle="user-dropdown"
-                data-dropdown-placement="bottom"
-              >
-                <span className="sr-only">Open user menu</span>
-                <img
-                  className="h-8 w-8 rounded-full"
-                  src="https://flowbite.com/docs/images/people/profile-picture-3.jpg"
-                  alt="user photo"
-                />
-              </button>
-            }
-          >
-            <div className="px-4 py-3">
-              <span className="block text-sm text-gray-900 dark:text-white">Bonnie Green</span>
-              <span className="block truncate text-sm text-gray-500 dark:text-gray-400">
-                name@flowbite.com
-              </span>
-            </div>
-            <ul className="py-2" aria-labelledby="user-menu-button">
-              <DropdownItem to="/dashboard">Admin</DropdownItem>
-              <DropdownItem to="/settings">Perfil</DropdownItem>
-              <DropdownItem to="/settings">Cerrar sesión</DropdownItem>
-            </ul>
-          </DropdownMenu>
+        <div className="flex items-center space-x-3 md:order-2 md:space-x-0 rtl:space-x-reverse">
+          <div className="relative">
+            <DropdownMenu
+              trigger={({ toggleMenu }) => (
+                <button
+                  onClick={toggleMenu}
+                  type="button"
+                  className="flex rounded-full bg-gray-800 text-sm focus:ring-4 focus:ring-gray-300 md:me-0 dark:focus:ring-gray-600"
+                  id="user-menu-button"
+                  aria-expanded="false"
+                  data-dropdown-toggle="user-dropdown"
+                  data-dropdown-placement="bottom"
+                >
+                  <span className="sr-only">Open user menu</span>
+                  <img
+                    className="h-8 w-8 rounded-full"
+                    src="https://flowbite.com/docs/images/people/profile-picture-3.jpg"
+                    alt="user photo"
+                  />
+                </button>
+              )}
+              menu={({ isOpen }) => (
+                <div
+                  className={`absolute end-0 top-13 z-50 list-none divide-y divide-gray-100 rounded-lg bg-white text-base shadow-sm md:top-12 dark:divide-gray-600 dark:bg-gray-700 ${isOpen ? 'block' : 'hidden'}`}
+                >
+                  <div className="px-4 py-3">
+                    <span className="block text-sm text-gray-900 dark:text-white">
+                      Bonnie Green
+                    </span>
+                    <span className="block truncate text-sm text-gray-500 dark:text-gray-400">
+                      name@flowbite.com
+                    </span>
+                  </div>
+                  <ul className="py-2" aria-labelledby="user-menu-button">
+                    <DropdownItem to="/dashboard">Admin</DropdownItem>
+                    <DropdownItem to="/settings">Perfil</DropdownItem>
+                    <DropdownItem to="/settings">Cerrar sesión</DropdownItem>
+                  </ul>
+                </div>
+              )}
+            />
+          </div>
           <button
             onClick={toggleMenu}
             data-collapse-toggle="navbar-user"
